@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.identity.api.server.api.resource.v1;
+package org.wso2.carbon.identity.api.server.api.resource.v2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -24,8 +24,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import org.wso2.carbon.identity.api.server.api.resource.v1.AuthorizationDetailsTypesCreationModel;
-import org.wso2.carbon.identity.api.server.api.resource.v1.ScopeCreationModel;
+import org.wso2.carbon.identity.api.server.api.resource.v2.AuthorizationDetailsTypesCreationModel;
+import org.wso2.carbon.identity.api.server.api.resource.v2.ScopeCreationModel;
 import javax.validation.constraints.*;
 
 
@@ -35,7 +35,7 @@ import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
 public class APIResourceCreationModel  {
-
+  
     private String name;
     private String identifier;
     private String description;
@@ -46,13 +46,13 @@ public class APIResourceCreationModel  {
 
 
     /**
-     **/
+    **/
     public APIResourceCreationModel name(String name) {
 
         this.name = name;
         return this;
     }
-
+    
     @ApiModelProperty(example = "Greetings API", required = true, value = "")
     @JsonProperty("name")
     @Valid
@@ -66,13 +66,13 @@ public class APIResourceCreationModel  {
     }
 
     /**
-     **/
+    **/
     public APIResourceCreationModel identifier(String identifier) {
 
         this.identifier = identifier;
         return this;
     }
-
+    
     @ApiModelProperty(example = "greetings_api", required = true, value = "")
     @JsonProperty("identifier")
     @Valid
@@ -86,13 +86,13 @@ public class APIResourceCreationModel  {
     }
 
     /**
-     **/
+    **/
     public APIResourceCreationModel description(String description) {
 
         this.description = description;
         return this;
     }
-
+    
     @ApiModelProperty(example = "Greetings API representation", value = "")
     @JsonProperty("description")
     @Valid
@@ -104,13 +104,13 @@ public class APIResourceCreationModel  {
     }
 
     /**
-     **/
+    **/
     public APIResourceCreationModel requiresAuthorization(Boolean requiresAuthorization) {
 
         this.requiresAuthorization = requiresAuthorization;
         return this;
     }
-
+    
     @ApiModelProperty(example = "true", value = "")
     @JsonProperty("requiresAuthorization")
     @Valid
@@ -122,13 +122,13 @@ public class APIResourceCreationModel  {
     }
 
     /**
-     **/
+    **/
     public APIResourceCreationModel scopes(List<ScopeCreationModel> scopes) {
 
         this.scopes = scopes;
         return this;
     }
-
+    
     @ApiModelProperty(value = "")
     @JsonProperty("scopes")
     @Valid
@@ -147,14 +147,14 @@ public class APIResourceCreationModel  {
         return this;
     }
 
-    /**
-     **/
+        /**
+    **/
     public APIResourceCreationModel authorizationDetailsTypes(List<AuthorizationDetailsTypesCreationModel> authorizationDetailsTypes) {
 
         this.authorizationDetailsTypes = authorizationDetailsTypes;
         return this;
     }
-
+    
     @ApiModelProperty(value = "")
     @JsonProperty("authorizationDetailsTypes")
     @Valid
@@ -173,7 +173,7 @@ public class APIResourceCreationModel  {
         return this;
     }
 
-
+    
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -186,11 +186,11 @@ public class APIResourceCreationModel  {
         }
         APIResourceCreationModel apIResourceCreationModel = (APIResourceCreationModel) o;
         return Objects.equals(this.name, apIResourceCreationModel.name) &&
-                Objects.equals(this.identifier, apIResourceCreationModel.identifier) &&
-                Objects.equals(this.description, apIResourceCreationModel.description) &&
-                Objects.equals(this.requiresAuthorization, apIResourceCreationModel.requiresAuthorization) &&
-                Objects.equals(this.scopes, apIResourceCreationModel.scopes) &&
-                Objects.equals(this.authorizationDetailsTypes, apIResourceCreationModel.authorizationDetailsTypes);
+            Objects.equals(this.identifier, apIResourceCreationModel.identifier) &&
+            Objects.equals(this.description, apIResourceCreationModel.description) &&
+            Objects.equals(this.requiresAuthorization, apIResourceCreationModel.requiresAuthorization) &&
+            Objects.equals(this.scopes, apIResourceCreationModel.scopes) &&
+            Objects.equals(this.authorizationDetailsTypes, apIResourceCreationModel.authorizationDetailsTypes);
     }
 
     @Override
@@ -203,7 +203,7 @@ public class APIResourceCreationModel  {
 
         StringBuilder sb = new StringBuilder();
         sb.append("class APIResourceCreationModel {\n");
-
+        
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    identifier: ").append(toIndentedString(identifier)).append("\n");
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
@@ -215,9 +215,9 @@ public class APIResourceCreationModel  {
     }
 
     /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
+    * Convert the given object to string with each line indented by 4 spaces
+    * (except the first line).
+    */
     private String toIndentedString(java.lang.Object o) {
 
         if (o == null) {

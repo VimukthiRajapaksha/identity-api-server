@@ -31,6 +31,7 @@
         <property name="apiResourceManager" ref="apiResourceManagementServiceFactoryBean"/>
         <property name="oAuthAdminServiceImpl" ref="oAuthAdminOSGiServiceFactoryBean"/>
         <property name="apiResourceCollectionManager" ref="apiResourceCollectionManagementServiceFactoryBean"/>
+        <property name="authorizationDetailsTypeManager" ref="authorizationDetailsTypeMgtOSGiServiceFactoryBean"/>
     </bean>
 
     <bean id="apiResourceManagementServiceFactoryBean"
@@ -41,4 +42,7 @@
 
     <bean id="apiResourceCollectionManagementServiceFactoryBean"
           class="org.wso2.carbon.identity.api.server.api.resource.common.factory.APIResourceCollectionMgtOSGiServiceFactory"/>
+
+    <bean id="authorizationDetailsTypeMgtOSGiServiceFactoryBean"
+          class="org.wso2.carbon.identity.api.server.api.resource.common.factory.AuthorizationDetailsTypeMgtOSGiServiceFactory"/>
 </beans>

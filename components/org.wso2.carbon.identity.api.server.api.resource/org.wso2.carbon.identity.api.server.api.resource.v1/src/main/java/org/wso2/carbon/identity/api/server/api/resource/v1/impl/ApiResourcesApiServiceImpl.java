@@ -101,4 +101,11 @@ public class ApiResourcesApiServiceImpl implements ApiResourcesApiService {
         return Response.ok().entity(serverAPIResourceManagementService.getAPIResources(before, after, filter, limit,
                 attributes)).build();
     }
+
+    @Override
+    public Response getAnAuthorizationDetailsType(String apiResourceId, String authorizationDetailsType) {
+
+        return Response.ok().entity(serverAPIResourceManagementService
+                .getAuthorizationDetailsTypeByType(apiResourceId, authorizationDetailsType)).build();
+    }
 }

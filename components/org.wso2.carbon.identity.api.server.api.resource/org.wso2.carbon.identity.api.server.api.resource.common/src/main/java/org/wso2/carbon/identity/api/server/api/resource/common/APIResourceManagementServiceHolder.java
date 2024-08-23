@@ -20,6 +20,7 @@ package org.wso2.carbon.identity.api.server.api.resource.common;
 
 import org.wso2.carbon.identity.api.resource.collection.mgt.APIResourceCollectionManager;
 import org.wso2.carbon.identity.api.resource.mgt.APIResourceManager;
+import org.wso2.carbon.identity.api.resource.mgt.AuthorizationDetailsTypeManager;
 import org.wso2.carbon.identity.oauth.OAuthAdminServiceImpl;
 
 /**
@@ -30,6 +31,7 @@ public class APIResourceManagementServiceHolder {
     private static APIResourceManager apiResourceManager;
     private static APIResourceCollectionManager apiResourceCollectionManager;
     private static OAuthAdminServiceImpl oAuthAdminServiceImpl;
+    private static AuthorizationDetailsTypeManager authorizationDetailsTypeManager;
 
     /**
      * Get APIResourceManager osgi service.
@@ -89,5 +91,26 @@ public class APIResourceManagementServiceHolder {
     public static void setOAuthAdminServiceImpl(OAuthAdminServiceImpl oAuthAdminServiceImpl) {
 
         APIResourceManagementServiceHolder.oAuthAdminServiceImpl = oAuthAdminServiceImpl;
+    }
+
+    /**
+     * Set {@link AuthorizationDetailsTypeManager} instance.
+     *
+     * @return AuthorizationDetailsTypeManager instance.
+     */
+    public static AuthorizationDetailsTypeManager getAuthorizationDetailsTypeManager() {
+
+        return authorizationDetailsTypeManager;
+    }
+
+    /**
+     * Set {@link AuthorizationDetailsTypeManager} instance.
+     *
+     * @param authorizationDetailsTypeManager AuthorizationDetailsTypeManager instance.
+     */
+    public static void setAuthorizationDetailsTypeManager(
+            AuthorizationDetailsTypeManager authorizationDetailsTypeManager) {
+
+        APIResourceManagementServiceHolder.authorizationDetailsTypeManager = authorizationDetailsTypeManager;
     }
 }

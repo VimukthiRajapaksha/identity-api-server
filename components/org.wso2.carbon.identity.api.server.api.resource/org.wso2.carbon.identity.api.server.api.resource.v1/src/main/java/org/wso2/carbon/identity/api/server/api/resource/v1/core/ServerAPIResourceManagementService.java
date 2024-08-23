@@ -18,10 +18,13 @@
 
 package org.wso2.carbon.identity.api.server.api.resource.v1.core;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.JSONObject;
 import org.wso2.carbon.context.CarbonContext;
 import org.wso2.carbon.identity.api.resource.mgt.APIResourceMgtException;
 import org.wso2.carbon.identity.api.resource.mgt.model.APIResourceSearchResult;
@@ -31,6 +34,8 @@ import org.wso2.carbon.identity.api.server.api.resource.v1.APIResourceListItem;
 import org.wso2.carbon.identity.api.server.api.resource.v1.APIResourceListResponse;
 import org.wso2.carbon.identity.api.server.api.resource.v1.APIResourcePatchModel;
 import org.wso2.carbon.identity.api.server.api.resource.v1.APIResourceResponse;
+import org.wso2.carbon.identity.api.server.api.resource.v1.AuthorizationDetailsTypesCreationModel;
+import org.wso2.carbon.identity.api.server.api.resource.v1.AuthorizationDetailsTypesGetModel;
 import org.wso2.carbon.identity.api.server.api.resource.v1.PaginationLink;
 import org.wso2.carbon.identity.api.server.api.resource.v1.Property;
 import org.wso2.carbon.identity.api.server.api.resource.v1.ScopeCreationModel;
@@ -42,6 +47,7 @@ import org.wso2.carbon.identity.api.server.common.ContextLoader;
 import org.wso2.carbon.identity.api.server.common.error.APIError;
 import org.wso2.carbon.identity.application.common.model.APIResource;
 import org.wso2.carbon.identity.application.common.model.APIResourceProperty;
+import org.wso2.carbon.identity.application.common.model.AuthorizationDetailsType;
 import org.wso2.carbon.identity.application.common.model.Scope;
 
 import java.io.UnsupportedEncodingException;
@@ -52,6 +58,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.ws.rs.core.Response;
@@ -382,7 +389,9 @@ public class ServerAPIResourceManagementService {
                         .collect(Collectors.toList()))
                 .requiresAuthorization(apiResource.isAuthorizationRequired())
                 .properties(apiResource.getProperties().stream().map(this::buildAPIResourceProperty)
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toList()))
+                .authorizationDetailsTypes(
+                        toAuthorizationDetailsGetModelsList(apiResource.getAuthorizationDetailsTypes()));
     }
 
     /**
@@ -428,6 +437,8 @@ public class ServerAPIResourceManagementService {
                 .identifier(apIResourceCreationModel.getIdentifier())
                 .description(apIResourceCreationModel.getDescription())
                 .scopes(createScopes(apIResourceCreationModel.getScopes()))
+                .authorizationDetailsTypes(
+                        toAuthorizationDetailsTypesList(apIResourceCreationModel.getAuthorizationDetailsTypes()))
                 .requiresAuthorization(apIResourceCreationModel.getRequiresAuthorization() != null ?
                         apIResourceCreationModel.getRequiresAuthorization() : true)
                 .type(APIResourceMgtEndpointConstants.BUSINESS_API_RESOURCE_TYPE);
@@ -543,5 +554,64 @@ public class ServerAPIResourceManagementService {
             throw APIResourceMgtEndpointUtil.handleException(Response.Status.FORBIDDEN,
                     ErrorMessage.ERROR_CODE_SYSTEM_API_RESOURCE_NOT_MODIFIABLE);
         }
+    }
+
+    /**
+     * Search authorization details type registered in the tenant for the given apiResourceId and type.
+     *
+     * @param apiResourceId            api resource id.
+     * @param authorizationDetailsType authorization details type.
+     * @return Authorization Details Type.
+     */
+    public AuthorizationDetailsTypesGetModel getAuthorizationDetailsTypeByType(final String apiResourceId,
+                                                                               final String authorizationDetailsType) {
+
+        try {
+            return this.toAuthorizationDetailsGetModel(APIResourceManagementServiceHolder.getAuthorizationDetailsTypeManager()
+                            .getAuthorizationDetailsTypeByApiIdAndType(apiResourceId, authorizationDetailsType,
+                            CarbonContext.getThreadLocalCarbonContext().getTenantDomain()));
+        } catch (APIResourceMgtException e) {
+            throw APIResourceMgtEndpointUtil.handleAPIResourceMgtException(e);
+        }
+    }
+
+    private AuthorizationDetailsTypesGetModel toAuthorizationDetailsGetModel(
+            final AuthorizationDetailsType authorizationDetailsType) {
+
+        final AuthorizationDetailsTypesGetModel typesGetModel = new AuthorizationDetailsTypesGetModel();
+        typesGetModel.setName(authorizationDetailsType.getName());
+        typesGetModel.setDescription(authorizationDetailsType.getDescription());
+        typesGetModel.setType(authorizationDetailsType.getType());
+        typesGetModel.setSchema(new Gson().fromJson(authorizationDetailsType.getSchema(),
+                new TypeToken<Map<String, Object>>() {}.getType()));
+
+        return typesGetModel;
+    }
+
+    private List<AuthorizationDetailsTypesGetModel> toAuthorizationDetailsGetModelsList(
+            final List<AuthorizationDetailsType> authorizationDetailsTypes) {
+
+        return CollectionUtils.isEmpty(authorizationDetailsTypes) ? Collections.emptyList() :
+                authorizationDetailsTypes.stream().map(this::toAuthorizationDetailsGetModel)
+                .collect(Collectors.toList());
+    }
+
+    private List<AuthorizationDetailsType> toAuthorizationDetailsTypesList(
+            final List<AuthorizationDetailsTypesCreationModel> typesCreationModels) {
+
+        return CollectionUtils.isEmpty(typesCreationModels) ? Collections.emptyList() :
+                typesCreationModels.stream().map(this::toAuthorizationDetailsType).collect(Collectors.toList());
+    }
+
+    private AuthorizationDetailsType toAuthorizationDetailsType(
+            final AuthorizationDetailsTypesCreationModel typesCreationModel) {
+
+        final AuthorizationDetailsType authorizationDetailsType = new AuthorizationDetailsType();
+        authorizationDetailsType.setType(typesCreationModel.getType());
+        authorizationDetailsType.setName(typesCreationModel.getName());
+        authorizationDetailsType.setDescription(typesCreationModel.getDescription());
+        authorizationDetailsType.setSchema(new JSONObject(typesCreationModel.getSchema()).toString());
+
+        return authorizationDetailsType;
     }
 }

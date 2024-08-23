@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.identity.api.server.api.resource.v1;
+package org.wso2.carbon.identity.api.server.api.resource.v2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -24,10 +24,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import org.wso2.carbon.identity.api.server.api.resource.v1.AuthorizationDetailsTypesGetModel;
-import org.wso2.carbon.identity.api.server.api.resource.v1.Property;
-import org.wso2.carbon.identity.api.server.api.resource.v1.ScopeGetModel;
-import org.wso2.carbon.identity.api.server.api.resource.v1.SubscribedApplicationGetModel;
+import org.wso2.carbon.identity.api.server.api.resource.v2.AuthorizationDetailsTypesGetModel;
+import org.wso2.carbon.identity.api.server.api.resource.v2.Property;
+import org.wso2.carbon.identity.api.server.api.resource.v2.ScopeGetModel;
+import org.wso2.carbon.identity.api.server.api.resource.v2.SubscribedApplicationGetModel;
 import javax.validation.constraints.*;
 
 
@@ -37,7 +37,7 @@ import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
 public class APIResourceResponse  {
-
+  
     private String id;
     private String name;
     private String description;
@@ -55,13 +55,13 @@ public class APIResourceResponse  {
     private String self;
 
     /**
-     **/
+    **/
     public APIResourceResponse id(String id) {
 
         this.id = id;
         return this;
     }
-
+    
     @ApiModelProperty(example = "gh43-jk34-vb34-df67", required = true, value = "")
     @JsonProperty("id")
     @Valid
@@ -75,13 +75,13 @@ public class APIResourceResponse  {
     }
 
     /**
-     **/
+    **/
     public APIResourceResponse name(String name) {
 
         this.name = name;
         return this;
     }
-
+    
     @ApiModelProperty(example = "Greetings API", required = true, value = "")
     @JsonProperty("name")
     @Valid
@@ -95,13 +95,13 @@ public class APIResourceResponse  {
     }
 
     /**
-     **/
+    **/
     public APIResourceResponse description(String description) {
 
         this.description = description;
         return this;
     }
-
+    
     @ApiModelProperty(example = "Greeting API representation", value = "")
     @JsonProperty("description")
     @Valid
@@ -113,13 +113,13 @@ public class APIResourceResponse  {
     }
 
     /**
-     **/
+    **/
     public APIResourceResponse identifier(String identifier) {
 
         this.identifier = identifier;
         return this;
     }
-
+    
     @ApiModelProperty(example = "greetings_api", required = true, value = "")
     @JsonProperty("identifier")
     @Valid
@@ -133,13 +133,13 @@ public class APIResourceResponse  {
     }
 
     /**
-     **/
+    **/
     public APIResourceResponse type(String type) {
 
         this.type = type;
         return this;
     }
-
+    
     @ApiModelProperty(example = "SYSTEM", value = "")
     @JsonProperty("type")
     @Valid
@@ -151,13 +151,13 @@ public class APIResourceResponse  {
     }
 
     /**
-     **/
+    **/
     public APIResourceResponse requiresAuthorization(Boolean requiresAuthorization) {
 
         this.requiresAuthorization = requiresAuthorization;
         return this;
     }
-
+    
     @ApiModelProperty(example = "true", value = "")
     @JsonProperty("requiresAuthorization")
     @Valid
@@ -169,13 +169,13 @@ public class APIResourceResponse  {
     }
 
     /**
-     **/
+    **/
     public APIResourceResponse scopes(List<ScopeGetModel> scopes) {
 
         this.scopes = scopes;
         return this;
     }
-
+    
     @ApiModelProperty(value = "")
     @JsonProperty("scopes")
     @Valid
@@ -194,14 +194,14 @@ public class APIResourceResponse  {
         return this;
     }
 
-    /**
-     **/
+        /**
+    **/
     public APIResourceResponse authorizationDetailsTypes(List<AuthorizationDetailsTypesGetModel> authorizationDetailsTypes) {
 
         this.authorizationDetailsTypes = authorizationDetailsTypes;
         return this;
     }
-
+    
     @ApiModelProperty(value = "")
     @JsonProperty("authorizationDetailsTypes")
     @Valid
@@ -220,14 +220,14 @@ public class APIResourceResponse  {
         return this;
     }
 
-    /**
-     **/
+        /**
+    **/
     public APIResourceResponse subscribedApplications(List<SubscribedApplicationGetModel> subscribedApplications) {
 
         this.subscribedApplications = subscribedApplications;
         return this;
     }
-
+    
     @ApiModelProperty(value = "")
     @JsonProperty("subscribedApplications")
     @Valid
@@ -246,14 +246,14 @@ public class APIResourceResponse  {
         return this;
     }
 
-    /**
-     **/
+        /**
+    **/
     public APIResourceResponse properties(List<Property> properties) {
 
         this.properties = properties;
         return this;
     }
-
+    
     @ApiModelProperty(value = "")
     @JsonProperty("properties")
     @Valid
@@ -272,14 +272,14 @@ public class APIResourceResponse  {
         return this;
     }
 
-    /**
-     **/
+        /**
+    **/
     public APIResourceResponse self(String self) {
 
         this.self = self;
         return this;
     }
-
+    
     @ApiModelProperty(example = "/t/carbon.super/api/server/v1/api-resources/eDUwOUNlcnRpZmljYXRlQXV0aGVudGljYXRvcg", required = true, value = "")
     @JsonProperty("self")
     @Valid
@@ -305,16 +305,16 @@ public class APIResourceResponse  {
         }
         APIResourceResponse apIResourceResponse = (APIResourceResponse) o;
         return Objects.equals(this.id, apIResourceResponse.id) &&
-                Objects.equals(this.name, apIResourceResponse.name) &&
-                Objects.equals(this.description, apIResourceResponse.description) &&
-                Objects.equals(this.identifier, apIResourceResponse.identifier) &&
-                Objects.equals(this.type, apIResourceResponse.type) &&
-                Objects.equals(this.requiresAuthorization, apIResourceResponse.requiresAuthorization) &&
-                Objects.equals(this.scopes, apIResourceResponse.scopes) &&
-                Objects.equals(this.authorizationDetailsTypes, apIResourceResponse.authorizationDetailsTypes) &&
-                Objects.equals(this.subscribedApplications, apIResourceResponse.subscribedApplications) &&
-                Objects.equals(this.properties, apIResourceResponse.properties) &&
-                Objects.equals(this.self, apIResourceResponse.self);
+            Objects.equals(this.name, apIResourceResponse.name) &&
+            Objects.equals(this.description, apIResourceResponse.description) &&
+            Objects.equals(this.identifier, apIResourceResponse.identifier) &&
+            Objects.equals(this.type, apIResourceResponse.type) &&
+            Objects.equals(this.requiresAuthorization, apIResourceResponse.requiresAuthorization) &&
+            Objects.equals(this.scopes, apIResourceResponse.scopes) &&
+            Objects.equals(this.authorizationDetailsTypes, apIResourceResponse.authorizationDetailsTypes) &&
+            Objects.equals(this.subscribedApplications, apIResourceResponse.subscribedApplications) &&
+            Objects.equals(this.properties, apIResourceResponse.properties) &&
+            Objects.equals(this.self, apIResourceResponse.self);
     }
 
     @Override
@@ -327,7 +327,7 @@ public class APIResourceResponse  {
 
         StringBuilder sb = new StringBuilder();
         sb.append("class APIResourceResponse {\n");
-
+        
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
@@ -344,9 +344,9 @@ public class APIResourceResponse  {
     }
 
     /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
+    * Convert the given object to string with each line indented by 4 spaces
+    * (except the first line).
+    */
     private String toIndentedString(java.lang.Object o) {
 
         if (o == null) {

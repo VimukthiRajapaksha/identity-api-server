@@ -28,7 +28,7 @@
 
     <name>WSO2 Identity Server - API Resource Rest API</name>
     <description>WSO2 Identity Server - API Resource Rest API</description>
-    <artifactId>org.wso2.carbon.identity.api.server.api.resource.v1</artifactId>
+    <artifactId>org.wso2.carbon.identity.api.server.api.resource.v2</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -95,7 +95,6 @@
         <dependency>
             <groupId>org.wso2.carbon.identity.framework</groupId>
             <artifactId>org.wso2.carbon.identity.api.resource.mgt</artifactId>
-            <version>7.3.75-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -120,7 +119,6 @@
             <groupId>org.wso2.carbon.identity.framework</groupId>
             <artifactId>org.wso2.carbon.identity.application.common</artifactId>
             <scope>provided</scope>
-            <version>7.3.75-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
@@ -140,41 +138,41 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-<!--                        <plugin>-->
-<!--                            <groupId>org.openapitools</groupId>-->
-<!--                            <artifactId>openapi-generator-maven-plugin</artifactId>-->
-<!--                            <version>4.1.2</version>-->
-<!--                            <executions>-->
-<!--                                <execution>-->
-<!--                                    <goals>-->
-<!--                                        <goal>generate</goal>-->
-<!--                                    </goals>-->
-<!--                                    <configuration>-->
-<!--                                        <inputSpec>${project.basedir}/src/main/resources/apiResources.yaml</inputSpec>-->
-<!--                                        <generatorName>org.wso2.carbon.codegen.CxfWso2Generator</generatorName>-->
-<!--                                        <configOptions>-->
-<!--                                            <sourceFolder>src/gen/java</sourceFolder>-->
-<!--                                            <apiPackage>org.wso2.carbon.identity.api.server.api.resource.v1</apiPackage>-->
-<!--                                            <modelPackage>org.wso2.carbon.identity.api.server.api.resource.v1-->
-<!--                                            </modelPackage>-->
-<!--                                            <packageName>org.wso2.carbon.identity.api.server.api.resource.v1</packageName>-->
-<!--                                            <dateLibrary>java17</dateLibrary>-->
-<!--                                            <hideGenerationTimestamp>true</hideGenerationTimestamp>-->
-<!--                                            <ignoreFileOverride>${project.basedir}/.openapi-generator-ignore</ignoreFileOverride>-->
-<!--                                        </configOptions>-->
-<!--                                        <output>.</output>-->
-<!--                                        <skipOverwrite>false</skipOverwrite>-->
-<!--                                    </configuration>-->
-<!--                                </execution>-->
-<!--                            </executions>-->
-<!--                            <dependencies>-->
-<!--                                <dependency>-->
-<!--                                    <groupId>org.openapitools</groupId>-->
-<!--                                    <artifactId>cxf-wso2-openapi-generator</artifactId>-->
-<!--                                    <version>1.0.0</version>-->
-<!--                                </dependency>-->
-<!--                            </dependencies>-->
-<!--                        </plugin>-->
+                        <plugin>
+                            <groupId>org.openapitools</groupId>
+                            <artifactId>openapi-generator-maven-plugin</artifactId>
+                            <version>4.1.2</version>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>generate</goal>
+                                    </goals>
+                                    <configuration>
+                                        <inputSpec>${project.basedir}/src/main/resources/apiResources.yaml</inputSpec>
+                                        <generatorName>org.wso2.carbon.codegen.CxfWso2Generator</generatorName>
+                                        <configOptions>
+                                            <sourceFolder>src/gen/java</sourceFolder>
+                                            <apiPackage>org.wso2.carbon.identity.api.server.api.resource.v2</apiPackage>
+                                            <modelPackage>org.wso2.carbon.identity.api.server.api.resource.v2
+                                            </modelPackage>
+                                            <packageName>org.wso2.carbon.identity.api.server.api.resource.v2</packageName>
+                                            <dateLibrary>java17</dateLibrary>
+                                            <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                            <ignoreFileOverride>${project.basedir}/.openapi-generator-ignore</ignoreFileOverride>
+                                        </configOptions>
+                                        <output>.</output>
+                                        <skipOverwrite>false</skipOverwrite>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.openapitools</groupId>
+                                    <artifactId>cxf-wso2-openapi-generator</artifactId>
+                                    <version>1.0.0</version>
+                                </dependency>
+                            </dependencies>
+                        </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
